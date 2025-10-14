@@ -11,3 +11,8 @@ def print_main_menu():
     print("5. Start monitoring mode (alarms are triggered)")
     print("6. Remove alarm")
     print("7. Exit")
+
+    def main():
+        """Main function to run the monitoring application."""
+        while True:
+            print_main_menu()
