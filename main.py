@@ -18,20 +18,23 @@ def print_main_menu():
             print_main_menu()
             choice = input("Select an option (1-7): ")
 
-            if choice == '1':
-                print("Starting monitoring (no alarms will be triggered)...")
-            elif choice == '2':
-                print("Listing active monitoring...")
-            elif choice == '3':
-                print("Creating an alarm...")
-            elif choice == '4':
-                print("Showing created alarms...")
-            elif choice == '5':
-                print("Starting monitoring mode (alarms will be triggered)...")
-            elif choice == '6':
-                print("Removing an alarm...")
-            elif choice == '7':
-                print("Exiting the application. Goodbye!")
-                break
-            else:
-                print("Invalid option. Please try again.")
+            match choice:
+                case '1':
+                    print("Starting monitoring (no alarms will be triggered)...")
+                case '2':
+                    print("Listing active monitoring...")
+                case '3':
+                    print("Creating an alarm...")
+                case '4':
+                    print("Showing created alarms...")
+                case '5':
+                    print("Starting monitoring mode (alarms will be triggered)...")
+                case '6':
+                    print("Removing an alarm...")
+                case '7':
+                    print("Exiting the application. Goodbye!")
+                    break
+                case _:
+                    print("Invalid option. Please try again.")
+    if __name__ == "__main__":
+        main()
