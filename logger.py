@@ -1,5 +1,7 @@
 from datetime import datetime
-from utils import now_str
+
+def now_str():
+    return datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 
 
 class Logger:
