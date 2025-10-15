@@ -3,7 +3,7 @@ def percent_input(user_prompt: str)
     entered_percent = input(user_prompt).strip()
     if not entered_percent.isdigit():
         raise ValueError("Input must be a number between 1-100.")
-    percent_value = int(entered_percent)
-    if percent_value < 1 or percent_value > 100:
+    percent = int(entered_percent)
+    if percent < 1 or percent > 100:
         raise ValueError("Input must be between 1-100.")
-    return percent_value
+    return percent
