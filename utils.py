@@ -1,4 +1,4 @@
-def percent_input(user_prompt: str)
+def percent_input(user_prompt: str):
     """Prompt the user for a percentage value between 0 and 100."""
     entered_percent = input(user_prompt).strip()
     if not entered_percent.isdigit():
