@@ -1,6 +1,7 @@
 from datetime import datetime
 
 def now_str():
+    """Return the current datetime as a filename-safe string."""
     return datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 
 
