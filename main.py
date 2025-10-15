@@ -14,6 +14,7 @@ def print_main_menu():
 
     def main():
         """Main function to run the monitoring application and handles the menu and logic."""
+        monitoring_active = False # Flag to track if monitoring is active
         while True:
             print_main_menu()
             choice = input("Select an option (1-7): ")
