@@ -15,3 +15,6 @@ class AlarmManager:
         # Use a list to store alarms
         self.alarms = []
     
+    def add_alarm(self, alarm: Alarm):
+        """Add a new alarm to the list."""
+        self.alarms.append(alarm)
