@@ -24,4 +24,9 @@ class AlarmManager:
         if index < 0 or index >= len(self.alarms):
             raise IndexError("Invalid alarm index.")
         self.alarms.pop(index)
-        
+    
+    def get_sorted_alarms(self):
+        """Return a list of alarms sorted by type and threshold."""
+        return sorted(self.alarms, key=lambda alarm: (alarm.alarm_type, alarm.threshold))
+    
+    
