@@ -33,3 +33,7 @@ class AlarmManager:
         """Get the highest threshold for a given alarm type."""
         thresholds = [alarm.threshold for alarm in self.alarms if alarm.alarm_type == alarm_type]
         return max(thresholds) if thresholds else None
+
+    def get_alarms_by_type(self, alarm_type: str):
+        """List all alarms of a specific type."""
+        return [alarm for alarm in self.alarms if alarm.alarm_type == alarm_type]
