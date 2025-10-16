@@ -1,0 +1,11 @@
+class Alarm:
+    """A class to represent an alarm with type and threshold."""
+    def __init__(self, alarm_type: str, threshold: int):
+        self.alarm_type = alarm_type
+        self.threshold = threshold
+
+    def __str__(self):
+        """String representation of the alarm."""
+        alarm_type_names = {'cpu': 'CPU alarm', 'memory': 'Memory alarm', 'disk': 'Disk alarm'}
+        return f"{alarm_type_names.get(self.alarm_type, self.alarm_type)} {self.threshold}%"
+    
