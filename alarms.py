@@ -29,4 +29,7 @@ class AlarmManager:
         """Return a list of alarms sorted by type and threshold."""
         return sorted(self.alarms, key=lambda alarm: (alarm.alarm_type, alarm.threshold))
     
-    
+    def get_highest_threshold(self, alarm_type: str):
+        """Get the highest threshold for a given alarm type."""
+        thresholds = [alarm.threshold for alarm in self.alarms if alarm.alarm_type == alarm_type]
+        return max(thresholds) if thresholds else None
