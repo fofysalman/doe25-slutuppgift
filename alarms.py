@@ -18,3 +18,10 @@ class AlarmManager:
     def add_alarm(self, alarm: Alarm):
         """Add a new alarm to the list."""
         self.alarms.append(alarm)
+    
+    def remove_alarm(self, index: int):
+        """Remove an alarm by its index in the list."""
+        if index < 0 or index >= len(self.alarms):
+            raise IndexError("Invalid alarm index.")
+        self.alarms.pop(index)
+        
