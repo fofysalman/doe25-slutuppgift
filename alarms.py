@@ -9,3 +9,9 @@ class Alarm:
         alarm_type_names = {'cpu': 'CPU alarm', 'memory': 'Memory alarm', 'disk': 'Disk alarm'}
         return f"{alarm_type_names.get(self.alarm_type, self.alarm_type)} {self.threshold}%"
     
+class AlarmManager:
+    """A class to manage multiple alarms."""
+    def __init__(self):
+        # Use a list to store alarms
+        self.alarms = []
+    
