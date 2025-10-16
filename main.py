@@ -1,11 +1,11 @@
 # Import necessary modules and classes
-from monitor import Monitor
+from monitor import Monitor, format_status
 from utils import print_main_menu
 
 def main():
     """Main function to run the monitoring application and handles the menu and logic."""
     monitoring_active = False # Flag to track if monitoring is active
-    monitor = Monitor() # Create an instance of Monitor
+    monitor = Monitor() # Create an instance/object of Monitor
     while True:
         print_main_menu()
         choice = input("Select an option (1-7): ")
@@ -14,10 +14,15 @@ def main():
                 print("Starting monitoring (no alarms will be triggered)...")
                 status = monitor.get_status()
                 monitoring_active = True
-                format_status = (status)
+                format_status(status)
                 input('\nPress Enter to return to the main menu...')
             case '2':
                 print("Listing active monitoring...")
+                if monitoring_active:
+                    print('Monitoring is ACTIVE (no alarms will be triggered).')
+                else:
+                    print('Monitoring is INACTIVE.')
+                input('\nPress Enter to return to the main menu...')
             case '3':
                 print("Creating an alarm...")
             case '4':
