@@ -37,3 +37,33 @@ class AlarmManager:
     def get_alarms_by_type(self, alarm_type: str):
         """List all alarms of a specific type."""
         return [alarm for alarm in self.alarms if alarm.alarm_type == alarm_type]
+def submenu_configure_alarm(alarm_manager: AlarmManager, logger, save_callback):
+    """Display submenu for configuring an alarm and return the user's choice."""
+    while True:
+        print("\n=== Configure Alarm ===")
+        print("1. CPU usage alarm")
+        print("2. Memory usage alarm")
+        print("3. Disk usage alarm")
+        print("4. Return to main menu")
+        choice = input("Select an option (1-4): ").strip()
+        if choice == '4':
+            print("Returning to main menu...")
+            return 
+        choice_to_alarm_type = {'1': 'cpu', '2': 'memory', '3': 'disk'}
+        if choice not in choice_to_alarm_type:
+            print ("Invalid option. Please try again.")
+            continue
+        try:
+            # Import here to avoid circular dependency
+            from utils import percent_input
+            lvl = percent_input("Enter threshold percentage (1-100): ")
+        except ValueError as value_error:
+            print(f"Error: {value_error}")
+            continue
+        alarm = Alarm(choice_to_alarm_type[choice], lvl)
+        alarm_manager.add_alarm(alarm)
+        print(f"Alarm for: {alarm.alarm_type} configured to {alarm.threshold}%")
+        logger.log(f"{alarm.alarm_type}_Usage alarm_Configured_ {alarm.threshold}_Percent")
+        # Persist using provided callback
+        save_callback(alarm_manager.alarms)
+        return
