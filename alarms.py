@@ -77,4 +77,5 @@ def show_configured_alarms(alarm_manager: AlarmManager):
     else:
         for alarm in sorted_alarms:
             print(str(alarm))
-    input('\nPress Enter to return to the main menu...')
+    input('\nPress any key to return to the main menu...')
+    

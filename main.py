@@ -32,14 +32,16 @@ def main():
                 status = monitor.get_status()
                 monitoring_active = True
                 format_status(status)
-                input('\nPress Enter to return to the main menu...')
+                input('\nPress any key to return to the main menu...')
             case '2':
                 print("Listing active monitoring...")
                 if monitoring_active:
                     print('Monitoring is ACTIVE (no alarms will be triggered).')
+                    status = monitor.get_status()
+                    format_status(status)
                 else:
                     print('Monitoring is INACTIVE.')
-                input('\nPress Enter to return to the main menu...')
+                input('\nPress any key to return to the main menu...')
             case '3':
                 print("Creating an alarm...")
                 submenu_configure_alarm(alarm_manager, logger, lambda alarms: save_alarms_to_file(alarms, ALARMS_FILE))

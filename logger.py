@@ -8,8 +8,9 @@ def now_str():
 class Logger:
     """Simple file logger used by the monitoring application."""
     def __init__(self):
-        # Create a logfile name that includes a current time string so
-        # each run gets its own file (helps with debugging and preserves history).
+        """Create a logfile name that includes a current time string so
+        each run gets its own file (helps with debugging and preserves history).
+        """
         self.filename = f"log_{now_str()}.log"
 
     def log(self, message: str):

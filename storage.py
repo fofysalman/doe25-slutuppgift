@@ -4,9 +4,9 @@ from alarms import Alarm
 def load_alarms_from_file(filename: str):
     """Load alarms from a JSON file and return a list of Alarm objects."""
     try:
-        with open(filename, 'r', encoding='utf-8') as file:
-            alarms_data = json.load(file)
-        alarms = []
+        with open(filename, 'r', encoding='utf-8') as file: # Open the file in read (r) mode
+            alarms_data = json.load(file) # Load the list of alarms from the file
+        alarms = [] # Initialize an empty list to store Alarm objects
         for alarm_entry in alarms_data:
             # Expecting each alarm_entry in the JSON object to be a dict with 'type' and 'threshold' keys
             if 'threshold' not in alarm_entry:
