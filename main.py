@@ -1,7 +1,7 @@
 # Import necessary modules and classes
 from logger import Logger
 from monitor import Monitor, format_status
-from utils import print_main_menu
+from utils import print_main_menu, press_any_key_to_continue
 from alarms import AlarmManager, submenu_configure_alarm, show_configured_alarms
 from storage import load_alarms_from_file, save_alarms_to_file
 
@@ -32,7 +32,7 @@ def main():
                 status = monitor.get_status()
                 monitoring_active = True
                 format_status(status)
-                input('\nPress any key to return to the main menu...')
+                press_any_key_to_continue()
             case '2':
                 print("Listing active monitoring...")
                 if monitoring_active:
@@ -41,7 +41,7 @@ def main():
                     format_status(status)
                 else:
                     print('Monitoring is INACTIVE.')
-                input('\nPress any key to return to the main menu...')
+                press_any_key_to_continue()
             case '3':
                 print("Creating an alarm...")
                 submenu_configure_alarm(alarm_manager, logger, lambda alarms: save_alarms_to_file(alarms, ALARMS_FILE))

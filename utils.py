@@ -1,3 +1,4 @@
+from readchar import readkey
 def percent_input(user_prompt: str):
     """Prompt the user for a percentage value between 0 and 100."""
     entered_percent = input(user_prompt).strip()
@@ -18,3 +19,8 @@ def print_main_menu():
     print("5. Start monitoring mode (alarms are triggered)")
     print("6. Remove alarm")
     print("7. Exit")
+
+def press_any_key_to_continue():
+    """Prompt the user to press any key to continue."""
+    print("\nPress any key to return to the main menu...", end='', flush=True)
+    readkey()

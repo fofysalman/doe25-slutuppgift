@@ -1,3 +1,4 @@
+from utils import press_any_key_to_continue
 class Alarm:
     """A class to represent an alarm with type and threshold."""
     def __init__(self, alarm_type: str, threshold: int):
@@ -77,5 +78,4 @@ def show_configured_alarms(alarm_manager: AlarmManager):
     else:
         for alarm in sorted_alarms:
             print(str(alarm))
-    input('\nPress any key to return to the main menu...')
-    
+    press_any_key_to_continue()
