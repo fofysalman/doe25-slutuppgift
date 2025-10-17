@@ -1,9 +1,20 @@
 # Import necessary modules and classes
+from logger import Logger
 from monitor import Monitor, format_status
 from utils import print_main_menu
-
+from alarms import AlarmManager, submenu_configure_alarm
+from storage import load_alarms_from_file, save_alarms_to_file
+ALARMS_FILE = 'alarms.json'  # Json file to save alarms
 def main():
     """Main function to run the monitoring application and handles the menu and logic."""
+    logger = Logger() # Create a logger instance/object
+    alarm_manager = AlarmManager() # Create an instance/object of AlarmManager
+    print('Loading previously saved alarms...')
+    loaded = load_alarms_from_file(ALARMS_FILE) # Load alarms from file
+    for alarm in load_alarms_from_file(ALARMS_FILE): # Add each loaded alarm to the manager
+        alarm_manager.add_alarm(alarm)
+    if loaded:
+        print(f'{len(loaded)} alarms loaded from {ALARMS_FILE}.')
     monitoring_active = False # Flag to track if monitoring is active
     monitor = Monitor() # Create an instance/object of Monitor
     while True:
@@ -25,7 +36,7 @@ def main():
                 input('\nPress Enter to return to the main menu...')
             case '3':
                 print("Creating an alarm...")
-                
+                submenu_configure_alarm(alarm_manager, logger, lambda alarms: save_alarms_to_file(alarms, ALARMS_FILE))
             case '4':
                 print("Showing created alarms...")
             case '5':
