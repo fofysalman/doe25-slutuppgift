@@ -19,3 +19,9 @@ def load_alarms_from_file(filename: str):
         return alarms
     except FileNotFoundError:
         return []
+    
+    def save_alarms_to_file(alarms, filename: str):
+        """Save a list of Alarm objects to a JSON file."""
+        alarms_data = [{'alarm_type': alarm.alarm_type, 'threshold': alarm.threshold} for alarm in alarms]  # Convert Alarm objects to dicts
+        with open(filename, 'w', encoding='utf-8') as file:  # Open the file in write (w) mode
+            json.dump(alarms_data, file, indent=2, ensure_ascii=False) # Write the list of dicts to the file as JSON
