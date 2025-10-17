@@ -2,21 +2,27 @@
 from logger import Logger
 from monitor import Monitor, format_status
 from utils import print_main_menu
-from alarms import AlarmManager, submenu_configure_alarm
+from alarms import AlarmManager, submenu_configure_alarm, show_configured_alarms
 from storage import load_alarms_from_file, save_alarms_to_file
+
 ALARMS_FILE = 'alarms.json'  # Json file to save alarms
+
 def main():
     """Main function to run the monitoring application and handles the menu and logic."""
     logger = Logger() # Create a logger instance/object
     alarm_manager = AlarmManager() # Create an instance/object of AlarmManager
     print('Loading previously saved alarms...')
-    loaded = load_alarms_from_file(ALARMS_FILE) # Load alarms from file
-    for alarm in load_alarms_from_file(ALARMS_FILE): # Add each loaded alarm to the manager
+    loaded_alarms = load_alarms_from_file(ALARMS_FILE) # Load alarms from file
+    
+    for alarm in loaded_alarms: # Add each loaded alarm to the manager
         alarm_manager.add_alarm(alarm)
-    if loaded:
-        print(f'{len(loaded)} alarms loaded from {ALARMS_FILE}.')
+    if loaded_alarms:
+        print(f'{len(loaded_alarms)} alarms loaded from {ALARMS_FILE}.')
+        logger.log('Previously_configured_alarms_loaded')
+   
     monitoring_active = False # Flag to track if monitoring is active
     monitor = Monitor() # Create an instance/object of Monitor
+    
     while True:
         print_main_menu()
         choice = input("Select an option (1-7): ")
@@ -39,6 +45,7 @@ def main():
                 submenu_configure_alarm(alarm_manager, logger, lambda alarms: save_alarms_to_file(alarms, ALARMS_FILE))
             case '4':
                 print("Showing created alarms...")
+                show_configured_alarms(alarm_manager)
             case '5':
                 print("Starting monitoring mode (alarms will be triggered)...")
             case '6':

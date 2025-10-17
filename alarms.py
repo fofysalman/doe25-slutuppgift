@@ -37,6 +37,7 @@ class AlarmManager:
     def get_alarms_by_type(self, alarm_type: str):
         """List all alarms of a specific type."""
         return [alarm for alarm in self.alarms if alarm.alarm_type == alarm_type]
+
 def submenu_configure_alarm(alarm_manager: AlarmManager, logger, save_callback):
     """Display submenu for configuring an alarm and return the user's choice."""
     while True:
@@ -67,3 +68,13 @@ def submenu_configure_alarm(alarm_manager: AlarmManager, logger, save_callback):
         # Persist using provided callback
         save_callback(alarm_manager.alarms)
         return
+    
+def show_configured_alarms(alarm_manager: AlarmManager):
+    """Display the list of configured alarms."""
+    sorted_alarms = alarm_manager.get_sorted_alarms()
+    if not sorted_alarms:
+        print("No alarms configured.")
+    else:
+        for alarm in sorted_alarms:
+            print(str(alarm))
+    input('\nPress Enter to return to the main menu...')
