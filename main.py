@@ -25,6 +25,7 @@ def main():
                 input('\nPress Enter to return to the main menu...')
             case '3':
                 print("Creating an alarm...")
+                
             case '4':
                 print("Showing created alarms...")
             case '5':
