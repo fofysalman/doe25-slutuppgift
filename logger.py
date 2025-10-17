@@ -18,5 +18,5 @@ class Logger:
         # Create a timestamp and write the log line.
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         timestamped_message = f"{timestamp} {message}\n"
-        with open(self.filename, 'a', encoding='utf-8') as f:
+        with open(self.filename, 'a', encoding='utf-8') as f:  # Open file in append (a) mode
             f.write(timestamped_message)
