@@ -79,3 +79,28 @@ def show_configured_alarms(alarm_manager: AlarmManager):
         for alarm in sorted_alarms:
             print(str(alarm))
     press_any_key_to_continue()
+
+def remove_alarm_by_index(alarm_manager: AlarmManager, logger, save_callback):
+    """Remove an alarm by its index and log the action."""
+    if not alarm_manager.alarms:
+        print("No alarms to remove.")
+        return
+    print("Select a configured alarm to remove:")
+    for index, alarm in enumerate(alarm_manager.alarms):
+        print(f"{index + 1}. {alarm}")
+    value = input(f"Choose number (or blank to cancel): ").strip()
+    if value == '':
+        print("Alarm removal cancelled.")
+        return
+    if not value.isdigit():
+        print("Invalid input. Please enter a valid number.")
+        return
+    index = int(value) - 1
+    try:
+        removed_alarm = alarm_manager.alarms[index]
+        alarm_manager.remove_alarm(index)
+        print(f"Removed alarm: {removed_alarm}")
+        logger.log(f"{removed_alarm.alarm_type}_Usage alarm_Removed_{removed_alarm.threshold}_Percent")
+        save_callback(alarm_manager.alarms) # Persist changes
+    except Exception as exception:
+        print(f"Error: {exception}")

@@ -2,7 +2,7 @@
 from logger import Logger
 from monitor import Monitor, format_status, monitoring_mode
 from utils import print_main_menu, press_any_key_to_continue
-from alarms import AlarmManager, submenu_configure_alarm, show_configured_alarms
+from alarms import AlarmManager, submenu_configure_alarm, show_configured_alarms, remove_alarm_by_index
 from storage import load_alarms_from_file, save_alarms_to_file
 
 ALARMS_FILE = 'alarms.json'  # Json file to save alarms
@@ -53,6 +53,7 @@ def main():
                 monitoring_mode(alarm_manager, logger)
             case '6':
                 print("Removing an alarm...")
+                remove_alarm_by_index(alarm_manager, logger, lambda alarms: save_alarms_to_file(alarms, ALARMS_FILE))
             case '7':
                 print("Exiting the application. Goodbye!")
                 break
