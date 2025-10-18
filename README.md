@@ -32,12 +32,15 @@ git clone https://github.com/fofysalman/doe25-slutuppgift.git
 ### 2. Skapa virtuell miljö (rekommenderas)
 ```bash
 python -m venv venv
+```
 
 ### 3. Aktivera miljön 
 ```bash
 source venv/bin/activate # mac/linux
 venv\Scripts\activate # windows
+```
 
 ### 3. Installera paket
 ```bash
 pip install -r requirements.txt
+```
