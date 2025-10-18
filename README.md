@@ -1,11 +1,11 @@
-# DOE25 Python final examniation
+# DOE25 Python slutuppgift
 ## Övervakningsapplikation | Monitoring application
 
 Slutuppgiften går ut på att skriva en övervakningsapplikation skriven i Python. Applikation samlar in information från operativsystemet och presenterar informationen för en användare.
 
 En användare kan interagera med applikationen via en konsol för att få fram information om CPU användning, minnesanvändning, diskanvändning. När användaren interagerar med applikationen via konsolmenyn ska inga konfigurerade larm aktiveras.
 
-Körbara filer och struktur:
+### Körbara filer och struktur:
 - main.py - startpunkt för programmet (konsolmeny)
 - monitor.py - samlar systeminfo (CPU, minne, disk)
 - alarms.py - Alarm- och AlarmManager-klasser
