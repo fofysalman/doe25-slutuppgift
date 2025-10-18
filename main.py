@@ -1,6 +1,6 @@
 # Import necessary modules and classes
 from logger import Logger
-from monitor import Monitor, format_status
+from monitor import Monitor, format_status, monitoring_mode
 from utils import print_main_menu, press_any_key_to_continue
 from alarms import AlarmManager, submenu_configure_alarm, show_configured_alarms
 from storage import load_alarms_from_file, save_alarms_to_file
@@ -50,6 +50,7 @@ def main():
                 show_configured_alarms(alarm_manager)
             case '5':
                 print("Starting monitoring mode (alarms will be triggered)...")
+                monitoring_mode(alarm_manager, logger)
             case '6':
                 print("Removing an alarm...")
             case '7':

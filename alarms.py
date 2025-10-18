@@ -58,11 +58,11 @@ def submenu_configure_alarm(alarm_manager: AlarmManager, logger, save_callback):
         try:
             # Import here to avoid circular dependency
             from utils import percent_input
-            lvl = percent_input("Enter threshold percentage (1-100): ")
+            threshold = percent_input("Enter threshold percentage (1-100): ")
         except ValueError as value_error:
             print(f"Error: {value_error}")
             continue
-        alarm = Alarm(choice_to_alarm_type[choice], lvl)
+        alarm = Alarm(choice_to_alarm_type[choice], threshold)
         alarm_manager.add_alarm(alarm)
         print(f"Alarm for: {alarm.alarm_type} configured to {alarm.threshold}%")
         logger.log(f"{alarm.alarm_type}_Usage alarm_Configured_ {alarm.threshold}_Percent")
