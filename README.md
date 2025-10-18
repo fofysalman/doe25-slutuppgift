@@ -14,7 +14,7 @@ Körbara filer och struktur:
 - utils.py - hjälpfunktioner
 - requirements.txt
 
-## Konsol meny startar med 7 val
+### Konsol meny startar med 7 val
 === Monitor application ===
 1. Start monitoring (collect status, no alarms are triggered)
 2. List active monitoring
@@ -31,7 +31,8 @@ git clone https://github.com/fofysalman/doe25-slutuppgift.git
 
 ### 2. Skapa virtuell miljö (rekommenderas)
 ```bash
-python -m venv venv
+python -m venv venv #windows
+python3 -m venv venv #linux
 ```
 
 ### 3. Aktivera miljön 
@@ -40,7 +41,7 @@ source venv/bin/activate # mac/linux
 venv\Scripts\activate # windows
 ```
 
-### 3. Installera paket
+### 4. Installera paket
 ```bash
 pip install -r requirements.txt
 ```
