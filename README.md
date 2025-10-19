@@ -39,6 +39,7 @@ python3 -m venv venv #linux
 ```bash
 source venv/bin/activate # mac/linux
 venv\Scripts\activate # windows
+source venv/Scripts/activate # Git Bash (Windows) activation
 ```
 
 ### 4. Installera paket
