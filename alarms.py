@@ -1,4 +1,4 @@
-from utils import press_any_key_to_continue
+from utils import press_any_key_to_continue , percent_input
 class Alarm:
     """A class to represent an alarm with type and threshold."""
     def __init__(self, alarm_type: str, threshold: int):
@@ -6,41 +6,35 @@ class Alarm:
         self.threshold = threshold
 
     def __str__(self):
-        """String representation of the alarm."""
         alarm_type_names = {'cpu': 'CPU alarm', 'memory': 'Memory alarm', 'disk': 'Disk alarm'}
         return f"{alarm_type_names.get(self.alarm_type, self.alarm_type)} {self.threshold}%"
     
 class AlarmManager:
     """A class to manage multiple alarms."""
     def __init__(self):
-        # Use a list to store alarms
+        # To enable sorting and manage alarms we keep alarms in a list
         self.alarms = []
     
     def add_alarm(self, alarm: Alarm):
-        """Add a new alarm to the list."""
         self.alarms.append(alarm)
     
     def remove_alarm(self, index: int):
-        """Remove an alarm by its index in the list."""
         if index < 0 or index >= len(self.alarms):
             raise IndexError("Invalid alarm index.")
         self.alarms.pop(index)
     
     def get_sorted_alarms(self):
-        """Return a list of alarms sorted by type and threshold."""
         return sorted(self.alarms, key=lambda alarm: (alarm.alarm_type, alarm.threshold))
     
     def get_highest_threshold(self, alarm_type: str):
-        """Get the highest threshold for a given alarm type."""
         thresholds = [alarm.threshold for alarm in self.alarms if alarm.alarm_type == alarm_type]
         return max(thresholds) if thresholds else None
 
     def get_alarms_by_type(self, alarm_type: str):
-        """List all alarms of a specific type."""
         return [alarm for alarm in self.alarms if alarm.alarm_type == alarm_type]
 
 def submenu_configure_alarm(alarm_manager: AlarmManager, logger, save_callback):
-    """Display submenu for configuring an alarm and return the user's choice."""
+    """To enable the user to create a new alarm, a submenu is used."""
     while True:
         print("\n=== Configure Alarm ===")
         print("1. CPU usage alarm")
@@ -56,8 +50,6 @@ def submenu_configure_alarm(alarm_manager: AlarmManager, logger, save_callback):
             print ("Invalid option. Please try again.")
             continue
         try:
-            # Import here to avoid circular dependency
-            from utils import percent_input
             threshold = percent_input("Enter threshold percentage (1-100): ")
         except ValueError as value_error:
             print(f"Error: {value_error}")
@@ -65,13 +57,13 @@ def submenu_configure_alarm(alarm_manager: AlarmManager, logger, save_callback):
         alarm = Alarm(choice_to_alarm_type[choice], threshold)
         alarm_manager.add_alarm(alarm)
         print(f"Alarm for: {alarm.alarm_type} configured to {alarm.threshold}%")
-        logger.log(f"{alarm.alarm_type}_Usage alarm_Configured_ {alarm.threshold}_Percent")
-        # Persist using provided callback
+        logger.log(f"{alarm.alarm_type}_Usage_Alarm_Configured_{alarm.threshold}_Percent")
+        # To be able to save all alarms after a change, a callback is used, so alarms are not lost when the program closes
         save_callback(alarm_manager.alarms)
         return
     
 def show_configured_alarms(alarm_manager: AlarmManager):
-    """Display the list of configured alarms."""
+    """Displays alarms so the user can verify configurations."""
     sorted_alarms = alarm_manager.get_sorted_alarms()
     if not sorted_alarms:
         print("No alarms configured.")
@@ -100,7 +92,7 @@ def remove_alarm_by_index(alarm_manager: AlarmManager, logger, save_callback):
         removed_alarm = alarm_manager.alarms[index]
         alarm_manager.remove_alarm(index)
         print(f"Removed alarm: {removed_alarm}")
-        logger.log(f"{removed_alarm.alarm_type}_Usage alarm_Removed_{removed_alarm.threshold}_Percent")
-        save_callback(alarm_manager.alarms) # Persist changes
+        logger.log(f"{removed_alarm.alarm_type}_Usage_Alarm_Removed_{removed_alarm.threshold}_Percent")
+        save_callback(alarm_manager.alarms)
     except Exception as exception:
         print(f"Error: {exception}")

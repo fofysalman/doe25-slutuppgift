@@ -1,9 +1,7 @@
 import psutil
 
-from utils import press_any_key_to_continue
-
 class SystemStatus:
-    """ A class to hold the system status information including CPU, memory, and disk usage."""
+    """ A class to be able to hold the system status information including CPU, memory, and disk usage."""
     def __init__(self, cpu_percent, memory_used, memory_total, disk_used, disk_total):
         self.cpu_percent = cpu_percent
         self.memory_used = memory_used
@@ -14,7 +12,6 @@ class SystemStatus:
 class Monitor:
     """A class to monitor and collect system status via psutil library."""
     def get_status(self):
-        """Fetches the current system status including CPU, memory, and disk usage."""
         cpu_percent = psutil.cpu_percent(interval=0.5)
         memory = psutil.virtual_memory()
         disk = psutil.disk_usage('/')
@@ -27,32 +24,27 @@ class Monitor:
             disk_total=disk.total
         )
 def bytes_to_Gbytes(num_bytes):
-    """Converts bytes to a human-readable format."""
     return num_bytes / (1024 ** 3)
 
 def format_status(status):
-    """Formats and prints the system status in a readable way."""
+    """To be able to format and print the system status in a readable way"""
     print(f"CPU usage: {status.cpu_percent:.0f}%")
     print(f"Memory usage: {bytes_to_Gbytes(status.memory_used):.1f} GB out of {bytes_to_Gbytes(status.memory_total):.1f} GB used")
     print(f"Disk usage: {bytes_to_Gbytes(status.disk_used):.1f} GB out of {bytes_to_Gbytes(status.disk_total):.1f} GB used")
 
 def monitoring_mode(alarm_manager, logger):
-    """Function to start monitoring mode where alarms can be triggered.
-    The monitoring loop runs in the foreground and when thresholds
-      are exceeded it is logged and prints warnings to the console."""
-    
     logger.log('Monitoring_mode_started')
     print("\nMonitoring mode is active. Press any key to exit and return to the main menu.")
     monitor = Monitor() 
 
     while True:
-        status = monitor.get_status() # Get current system status
+        status = monitor.get_status()
         print(f"[Monitoring active] CPU: {status.cpu_percent:.0f}%| Mem {bytes_to_Gbytes(status.memory_used):.1f}GB | Disk {bytes_to_Gbytes(status.disk_used):.1f}GB")
 
         for alarm_type in ['cpu', 'memory', 'disk']:
             highest_threshold = alarm_manager.get_highest_threshold(alarm_type)
             if highest_threshold is None:
-                continue  # No alarms of this type configured
+                continue
             current_value = 0
             if alarm_type == 'cpu':
                 current_value = status.cpu_percent
@@ -66,7 +58,7 @@ def monitoring_mode(alarm_manager, logger):
         print('Press any key to exit and return to the main menu...')
         from utils import is_key_pressed
         import time
-        for tick in range(30): # Check for key press every 0.1 second for 3 seconds
+        for tick in range(30):
             if is_key_pressed():
                 logger.log('Monitoring_mode_stopped_by_user')
                 print("\nExiting monitoring mode and returning to main menu.")
